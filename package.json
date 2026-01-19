@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node monitor.js",
+    "start": "node index.js",
     "register": "node -r dotenv/config register.js"
   }
 }
