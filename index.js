@@ -281,7 +281,19 @@ io.on("connection", (socket) => {
   });
 });
 
-/* Monitor printed in PM2 logs of this instance */
+/* This part is made specificaly for MacOS systems or systems with network polices that tell the device to stop 
+inboud and outbound connects for the website page, if you expirience this issue on MacOS or other similar systems 
+there are some system polices you will need to change to ensure this works properly but it helps keep the website 
+alive. [This is primarly for laptop use cases or just heavily restricted systems || This is safe to remove if you want]
+*/
+setInterval(() => {
+  require('https').get('https://example.com', () => {});
+}, 30000);
+
+/* This will print in the logs of the pm2 instance running this script, you can either type it manually into your 
+browser or view the logs and quick link to it. Or again if your using multiple IP's like a Tailscale IP you can
+use that IP address and just put the port this script is running at
+*/
 server.listen(PORT, HOST, () =>
   console.log(`Monitor online: http://0.0.0.0:${PORT}`)
 );
